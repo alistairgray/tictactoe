@@ -1,15 +1,24 @@
 .grid {
   border: 1px solid red;
   position: relative;
-  height: 100vh;
-  width: 100vw;
+  height: 1000px;
+  width: 650px;
   margin: 0 auto;
 }
 
-.line {
-  border: 1px solid black;
+.whoPlayer {
+  border: 1px solid blue;
+  display: inline-block;
   position: relative;
-  top: 5%;
+  float: right;
+  top: 167px;
+  right: 20%;
+}
+
+.line {
+  border: 3px solid black;
+  position: relative;
+  /* top: 5%; */
   width: 600px;
   height: 250px;
   margin: 0 auto;
@@ -21,11 +30,19 @@
   height: 150px;
   width: 150px;
   margin: 15px;
-  border: 2px solid black;
+  border: 8px solid black;
   display: inline-block;
   position: relative;
+  background-position: center;
+  background-size: 80%;
+  background-repeat: no-repeat;
 }
 
 h1 {
   text-align: center;
+  font-size: 50pt;
+}
+
+button {
+  display: block;
 }

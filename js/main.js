@@ -24,13 +24,31 @@ const winG = [ta, mb, bc];
 const winH = [tc, mb, ba];
 
 // Empty player arrays
-const playerO = [];
-const playerX = [];
+const playerOGame = [];
+const playerXGame = [];
 
 
+// DOM logic
 
+let currentPlayer = null;
 
-$('#topa').on('click', function(){
-  $('#topa') = ('<p>o</p>')
+$('#playerO').on('click', function(){
+  $('#playerO').css('background-color', 'red')
+  currentPlayer = 'playerO';
+})
 
+$('#playerX').on('click', function(){
+  $('#playerX').css('background-color', 'red')
+  currentPlayer = 'playerX';
+})
+
+$('.box').on('click', function(event){
+  let clickedBox = event.target
+  let currentBoxID = clickedBox.id || 'No ID';
+  console.log(currentBoxID);
+    if(currentPlayer === 'playerO'){
+      $('#' + currentBoxID).css('background-image', 'url(images/o.png)')
+    } else {
+      $('#' + currentBoxID).css('background-image', 'url(images/x.png)')
+  }
 })
