@@ -14,19 +14,72 @@
 // ba || bb || bc
 
 // successful wins
-const winA = [ta, tb, tc];
-const winB = [ma, mb, mc];
-const winC = [ba, bb, bc];
-const winD = [ta, ma, ba];
-const winE = [tb, mb, bb];
-const winF = [tc, mc, bc];
-const winG = [ta, mb, bc];
-const winH = [tc, mb, ba];
+// const winA = [ta, tb, tc];
+// const winB = [ma, mb, mc];
+// const winC = [ba, bb, bc];
+// const winD = [ta, ma, ba];
+// const winE = [tb, mb, bb];
+// const winF = [tc, mc, bc];
+// const winG = [ta, mb, bc];
+// const winH = [tc, mb, ba];
 
 // Empty player arrays
-const playerOGame = [];
-const playerXGame = [];
+// const playerOGame = [];
+// const playerXGame = [];
 
+// Game logic
+const currentGame = [
+
+  [ta, tb, tc],
+  [ma, mb, mc],
+  [ba, bb, bc],
+  [ta, ma, ba],
+  [tb, mb, bb],
+  [tc, mc, bc],
+  [ta, mb, bc],
+  [tc, mb, ba],
+
+]
+const playerXGame = [ta, tb, tc];
+const playerOGame = [];
+
+// Loops through and logs elements in each array
+for(let i=0; i < currentGame.length; i++){
+  console.log(currentGame[i]);
+  for(let j=0; j < playerXGame.length; j++)
+  console.log(playerXGame[j]);
+  if(playerXGame[j] === currentGame[i]){
+    console.log('playerXGame wins');
+  }
+}
+
+
+
+
+
+// Game Win Check
+
+// $.map(currentGame, function(e, i,){
+//   console.log(i);
+// });
+
+// for (let key in currentGame){
+//     if(currentGame.hasOwnProperty(key)){
+//       console.log(key + ":" + currentGame[key]);
+//   }
+// };
+
+// for (let [key, value] of Object.entries(currentGame)){
+//     console.log()
+//   // console.log(key, `${$('#' + value).attr('id')}`);
+//   // $('#' + value).attr(value).id
+// }
+
+
+
+// function(e, i){
+
+let count = 0;
 
 // DOM logic
 
@@ -44,11 +97,15 @@ $('#playerX').on('click', function(){
 
 $('.box').on('click', function(event){
   let clickedBox = event.target
-  let currentBoxID = clickedBox.id || 'No ID';
-  console.log(currentBoxID);
+  let currentBoxID = clickedBox.id;
+  // console.log(currentBoxID);
     if(currentPlayer === 'playerO'){
-      $('#' + currentBoxID).css('background-image', 'url(images/o.png)')
-    } else {
+      $('#' + currentBoxID).css('background-image', 'url(images/o.png)');
+      playerOGame.push(currentBoxID);
+    } else if(currentPlayer === 'playerX'){
       $('#' + currentBoxID).css('background-image', 'url(images/x.png)')
+      playerXGame.push(currentBoxID)
   }
-})
+  count += 1;
+  console.log(count);
+});
