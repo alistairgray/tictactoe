@@ -1,33 +1,9 @@
-// tic tac toe psuedocode
-
-// Each box needs to be clickable
-// after each click a relevant image needs to be visible
-
-// the logic needs to be created to store the boxes which
-// were clicked
-
-// The stored info could be inside an array or object. This would also mean that the winning combinations would require to be stored also
-
 // Here is how the grid is portrayed:
 // ta || tb || tc
 // ma || mb || mc
 // ba || bb || bc
 
-// successful wins
-// const winA = [ta, tb, tc];
-// const winB = [ma, mb, mc];
-// const winC = [ba, bb, bc];
-// const winD = [ta, ma, ba];
-// const winE = [tb, mb, bb];
-// const winF = [tc, mc, bc];
-// const winG = [ta, mb, bc];
-// const winH = [tc, mb, ba];
-
-// Empty player arrays
-// const playerOGame = [];
-// const playerXGame = [];
-
-// Game logic
+// Game Win Conditions
 const currentGame = [
 
   [ta, tb, tc],
@@ -41,9 +17,11 @@ const currentGame = [
 
 ]
 
+// Arrays that track the player's progress
 const playerXGame = [];
 const playerOGame = [];
 
+// Function to check if either player has won
 const gameChecker = function(player){
 for(let i=0; i < currentGame.length; i++){
   const a = currentGame[i][0]
@@ -55,18 +33,13 @@ for(let i=0; i < currentGame.length; i++){
   }
 };
 
-
-// function(e, i){
-
+// Counts how many moves have been made
 let count = 0;
 
-
-// DOM logic
-
+// Starting current player if no button is clicked
 let currentPlayer = null;
 
-
-
+// Changes button to red for current player and grey for the other
 $('#playerO').on('click', function(){
   $('#playerO').css('background-color', 'red')
   $('#playerX').css('background-color', 'grey')
@@ -79,45 +52,32 @@ $('#playerX').on('click', function(){
   currentPlayer = 'playerX';
 })
 
+
+// The main game
 $('.box').on('click', function(event){
   let clickedBox = event.target
   let currentBoxID = clickedBox.id;
+  // Logic check if box already clicked
+  if(playerOGame.includes(clickedBox) || playerXGame.includes(clickedBox)){
+    console.log('Box already clicked, pick another');
+  }else{ // Add image to box, push to player's array and then check if player won
       if(currentPlayer === 'playerO'){
       $('#' + currentBoxID).css('background-image', 'url(images/o.png)');
       playerOGame.push(clickedBox);
       gameChecker(playerOGame);
+      count += 1;
+      console.log(count);
     } else if(currentPlayer === 'playerX'){
       $('#' + currentBoxID).css('background-image', 'url(images/x.png)')
       playerXGame.push(clickedBox)
       gameChecker(playerXGame);
-  } else if(currentPlayer === null){
+      count += 1;
+      console.log(count);
+  } else if(currentPlayer === null){ // Logic check if no player is selected
     console.log('choose a player before starting');
   }
-  count += 1;
-  console.log(count);
   if(count === 9){
     console.log("It's a draw!");
+    }
   }
 });
-
-// Working click function
-// $('.box').on('click', function(event){
-//   let clickedBox = event.target
-//   let currentBoxID = clickedBox.id;
-//       if(currentPlayer === 'playerO'){
-//       $('#' + currentBoxID).css('background-image', 'url(images/o.png)');
-//       playerOGame.push(clickedBox);
-//       gameChecker(playerOGame);
-//     } else if(currentPlayer === 'playerX'){
-//       $('#' + currentBoxID).css('background-image', 'url(images/x.png)')
-//       playerXGame.push(clickedBox)
-//       gameChecker(playerXGame);
-//   } else if(currentPlayer === null){
-//     console.log('choose a player before starting');
-//   }
-//   count += 1;
-//   console.log(count);
-//   if(count === 9){
-//     console.log("It's a draw!");
-//   }
-// });
