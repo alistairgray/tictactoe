@@ -40,72 +40,84 @@ const currentGame = [
   [tc, mb, ba],
 
 ]
-const playerXGame = [ta, tb, tc];
+
+const playerXGame = [];
 const playerOGame = [];
 
-// Loops through and logs elements in each array
+const gameChecker = function(player){
 for(let i=0; i < currentGame.length; i++){
-  console.log(currentGame[i]);
-  for(let j=0; j < playerXGame.length; j++)
-  console.log(playerXGame[j]);
-  if(playerXGame[j] === currentGame[i]){
-    console.log('playerXGame wins');
+  const a = currentGame[i][0]
+  const b = currentGame[i][1]
+  const c = currentGame[i][2]
+    if (player.includes(a) && player.includes(b) && player.includes(c)){
+    console.log(currentPlayer, 'Wins!');
+    }
   }
-}
-
-
-
-
-
-// Game Win Check
-
-// $.map(currentGame, function(e, i,){
-//   console.log(i);
-// });
-
-// for (let key in currentGame){
-//     if(currentGame.hasOwnProperty(key)){
-//       console.log(key + ":" + currentGame[key]);
-//   }
-// };
-
-// for (let [key, value] of Object.entries(currentGame)){
-//     console.log()
-//   // console.log(key, `${$('#' + value).attr('id')}`);
-//   // $('#' + value).attr(value).id
-// }
-
+};
 
 
 // function(e, i){
 
 let count = 0;
 
+
 // DOM logic
 
 let currentPlayer = null;
 
+
+
 $('#playerO').on('click', function(){
   $('#playerO').css('background-color', 'red')
+  $('#playerX').css('background-color', 'grey')
   currentPlayer = 'playerO';
 })
 
 $('#playerX').on('click', function(){
   $('#playerX').css('background-color', 'red')
+  $('#playerO').css('background-color', 'grey')
   currentPlayer = 'playerX';
 })
 
 $('.box').on('click', function(event){
   let clickedBox = event.target
   let currentBoxID = clickedBox.id;
-  // console.log(currentBoxID);
-    if(currentPlayer === 'playerO'){
+      if(currentPlayer === 'playerO'){
       $('#' + currentBoxID).css('background-image', 'url(images/o.png)');
-      playerOGame.push(currentBoxID);
+      playerOGame.push(clickedBox);
+      gameChecker(playerOGame);
     } else if(currentPlayer === 'playerX'){
       $('#' + currentBoxID).css('background-image', 'url(images/x.png)')
-      playerXGame.push(currentBoxID)
+      playerXGame.push(clickedBox)
+      gameChecker(playerXGame);
+  } else if(currentPlayer === null){
+    console.log('choose a player before starting');
   }
   count += 1;
   console.log(count);
+  if(count === 9){
+    console.log("It's a draw!");
+  }
 });
+
+// Working click function
+// $('.box').on('click', function(event){
+//   let clickedBox = event.target
+//   let currentBoxID = clickedBox.id;
+//       if(currentPlayer === 'playerO'){
+//       $('#' + currentBoxID).css('background-image', 'url(images/o.png)');
+//       playerOGame.push(clickedBox);
+//       gameChecker(playerOGame);
+//     } else if(currentPlayer === 'playerX'){
+//       $('#' + currentBoxID).css('background-image', 'url(images/x.png)')
+//       playerXGame.push(clickedBox)
+//       gameChecker(playerXGame);
+//   } else if(currentPlayer === null){
+//     console.log('choose a player before starting');
+//   }
+//   count += 1;
+//   console.log(count);
+//   if(count === 9){
+//     console.log("It's a draw!");
+//   }
+// });
