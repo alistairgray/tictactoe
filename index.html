@@ -6,10 +6,11 @@
     <link rel="stylesheet" href="css/style.css"
   </head>
   <body>
-    <div class="whoPlayer">
+
+    <!-- <div class="whoPlayer">
           <button id="playerO"><p>Player O</p>
           <button id="playerX"><p>Player X</p>
-    </div>
+    </div> -->
     <div class="grid">
       <h1>tic tac toe</h1>
       <div id="top" class="line">
@@ -28,6 +29,18 @@
         <div id="bc" class="box"></div>
       </div>
     </div>
+    <div class="scoreboard">
+    <h2>Scoreboard</h2>
+    <div class="round">
+    <h3>Round 1</h3>
+    <p id="pO"></p><p>Score:</p><p id="pOScore"></p>
+    <br />
+    <p id="pX"></p><p>Score:</p><p id="pOScore"></p>
+  </div>
+  <div class="status">
+    <button id="start">START</button>
+  </div>
+</div>
     <script src="js/jquery.js" charset="utf-8"></script>
     <script src="js/main.js" charset="utf-8"></script>
   </body>

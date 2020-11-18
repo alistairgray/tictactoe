@@ -33,11 +33,29 @@ for(let i=0; i < currentGame.length; i++){
   }
 };
 
-// Counts how many moves have been made
-let count = 0;
-
 // Starting current player if no button is clicked
 let currentPlayer = null;
+
+// Start button randomly selects which player starts
+$('#start').on('click', function(){
+  const playerO = Math.random()
+  const playerX = Math.random()
+  if(playerO > playerX){
+    currentPlayer = 'playerO';
+  } else {
+    currentPlayer = 'playerX';
+  }
+  if(currentPlayer === 'playerO'){
+  $('#start').text("Player O's Turn").css({'font-size':'30pt','background-color': 'blue'});
+} else {
+  $('#start').text("Player X's Turn").css({'font-size':'30pt','background-color': 'red'});
+  }
+});
+
+
+
+// Counts how many moves have been made
+let count = 0;
 
 // Changes button to red for current player and grey for the other
 $('#playerO').on('click', function(){
@@ -67,12 +85,14 @@ $('.box').on('click', function(event){
       gameChecker(playerOGame);
       count += 1;
       console.log(count);
+      currentPlayer = 'playerX'
     } else if(currentPlayer === 'playerX'){
       $('#' + currentBoxID).css('background-image', 'url(images/x.png)')
       playerXGame.push(clickedBox)
       gameChecker(playerXGame);
       count += 1;
       console.log(count);
+      currentPlayer = 'playerO'
   } else if(currentPlayer === null){ // Logic check if no player is selected
     console.log('choose a player before starting');
   }
