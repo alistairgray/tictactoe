@@ -116,7 +116,7 @@ input {
   background-repeat: no-repeat;
 }
 
-#start {
+.start {
   width: 100%;
   height: 100%;
   background-color: red;
@@ -133,16 +133,30 @@ input {
   font-size: 30pt;
 }
 
-#cplayerO {
+.cPlayerO {
   width: 100%;
   height: 100%;
   background-color: blue;
   color: white;
 }
 
-#cplayerAI {
+.cPlayerAI {
   width: 100%;
   height: 100%;
   background-color: red;
+  color: white;
+}
+
+.winner {
+  width: 100%;
+  height: 100%;
+  background-color: violet;
+  color: white;
+}
+
+.draw {
+  width: 100%;
+  height: 100%;
+  background-color: black;
   color: white;
 }
