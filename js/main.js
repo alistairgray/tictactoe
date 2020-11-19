@@ -20,15 +20,16 @@ const currentGame = [
 // Global Variables
 
 // Arrays that track the player's progress
-let playerXGame = [];
-let playerOGame = [];
+let humanGame = [];
+let aiGame = [];
+let aiAvailChoices = [ta, tb, tc, ma, mb, mc, ba, bb, bc];
 
 // Used to check if game is won or draw
 let gameStatus = null;
 
 // Player scores which are placed on the scoreboard via jQuery
-let playerOScore = 0;
-let playerXScore = 0;
+let humanScore = 0;
+let aiScore = 0;
 
 // Starting current player which is used to check if no button is clicked
 let currentPlayer = null;
@@ -39,21 +40,14 @@ let count = 0;
 // --------------------------------------------------------------------------------------------------- //
 // GAME FUNCTIONS
 
-// Start button randomly selects via 'coin flip' which player starts
-$('#start').on('click', function(){
+// Human goes first
+$('.start').on('click', function(){
+  if(gameStatus === 'won' || gameStatus === 'draw' || gameStatus === 'inProgress'){
+    return false;
+  }
   gameStatus = 'inProgress';
-  const playerO = Math.random()
-  const playerX = Math.random()
-  if(playerO > playerX){
-    currentPlayer = 'playerO';
-  } else {
-    currentPlayer = 'playerX';
-  }
-  if(currentPlayer === 'playerO'){
-  $('#start').text("Player O's Turn").css({'font-size':'30pt','background-color': 'blue'});
-} else {
-  $('#start').text("Player X's Turn").css({'font-size':'30pt','background-color': 'red'});
-  }
+  currentPlayer = 'human';
+  $('.start').text("Human's Turn").css('background-color', 'blue');
 });
 
 // Checks on click of a box if the current player has made a winning move
@@ -66,19 +60,19 @@ for(let i=0; i < currentGame.length; i++){
   const c = currentGame[i][2]
     if (player.includes(a) && player.includes(b) && player.includes(c)){
       console.log(currentPlayer, 'Wins!');
-      $('#start').text(currentPlayer+' Wins!').css({'font-size':'30pt','background-color': 'pink'});
+      $('.start').text(currentPlayer+' Wins!').css('background-color', 'violet')
       gameStatus = 'won';
-      if(currentPlayer === 'playerO'){
-        playerOScore +=1;
-        $('#pO').text(playerOScore)
+      if(currentPlayer === 'human'){
+        humanScore +=1;
+        $('#pO').text(humanScore)
         resetGame();
-      } else if(currentPlayer === 'playerX'){
-        playerXScore +=1;
-        $('#pX').text(playerXScore)
+      } else if(currentPlayer === 'ai'){
+        aiScore +=1;
+        $('#pX').text(aiScore)
         resetGame();
         }
     } else if(count === 9 && gameStatus !== 'won'){ // draw check
-      $('#start').text("It's a draw!").css({'font-size':'30pt','background-color': 'black'});
+      $('.start').text("It's a draw!").css('background-color', 'black')
       gameStatus = 'draw';
       resetGame();
     }
@@ -90,47 +84,29 @@ $('.box').on('click', function(event){
 
   // Puts the clicked box html data into the clickedBox local variable
   let clickedBox = event.target
-
   // Extracts the ID from the clickedBox variable
   let currentBoxID = clickedBox.id;
-
   // Logic check if game is over
   if(gameStatus === 'won' || gameStatus === 'draw'){
     alert('Game Over. Click play again to reset the game')
 
     // Logic check if box already clicked. Alerts player if already clicked
-  } else if(playerOGame.includes(clickedBox) || playerXGame.includes(clickedBox)){
+  } else if(humanGame.includes(clickedBox) || aiGame.includes(clickedBox)){
     alert('Box already clicked, pick another');
 
   }else{ // Checks who the current player is
-      if(currentPlayer === 'playerO'){
-
+      if(currentPlayer === 'human'){
       // Changes status div to display new text and blue background
-      $('#start').text("Player O's Turn").css({'font-size':'30pt','background-color': 'blue'});
-
+      $('.start').text("Humans's Turn").css('background-color', 'blue');
       $('#' + currentBoxID).css('background-image', 'url(images/o.png)');
-
-      // Pushes the clickedBox html data into playerOGame array
-      playerOGame.push(clickedBox);
-
+      // Pushes the clickedBox html data into humanGame array
+      humanGame.push(clickedBox);
+      spliceChoice(clickedBox);
       count += 1;
-
-      $('#start').text("Player X's Turn").css({'font-size':'30pt','background-color': 'red'});
-      
-      gameChecker(playerOGame);
-
-      currentPlayer = 'playerX'
-
-      // Checks who the current player is
-    } else if(currentPlayer === 'playerX'){
-      $('#start').text("Player X's Turn").css({'font-size':'30pt','background-color': 'red'});
-      $('#' + currentBoxID).css('background-image', 'url(images/x.png)')
-      playerXGame.push(clickedBox)
-      count += 1;
-      $('#start').text("Player O's Turn").css({'font-size':'30pt','background-color': 'blue'});
-      gameChecker(playerXGame);
-      currentPlayer = 'playerO'
-
+      $('.start').text("AI's Turn").css('background-color', 'red');
+      gameChecker(humanGame);
+      currentPlayer = 'ai'
+      aiPlayer();
   } else if(currentPlayer === null){ // Logic check if no player is selected
     alert('Click the red start button');
     }
@@ -143,10 +119,40 @@ const resetGame = function(){
     count = 0;
     currentPlayer = null;
     gameStatus = null;
-    playerOGame = [];
-    playerXGame = [];
-    $('.box').css('background-image', 'none')
-    $('#start').text("START").css({'font-size':'30pt','background-color': 'red'});
+    humanGame = [];
+    aiGame = [];
+    aiAvailChoices = [ta, tb, tc, ma, mb, mc, ba, bb, bc];
+    $('.box').css('background-image', 'none');
+    $('.start').text("START").css('background-color', 'red')
     $('#resetGame').css('visibility', 'hidden');
   })
 }
+
+const aiPlayer = function(){
+  if(gameStatus === 'won' || gameStatus === 'draw'){
+    return false;
+  } else {
+    setTimeout(function () {
+      $('.start').text("AI's Turn").css('background-color', 'red');
+      let randElement = Math.floor(Math.random() * aiAvailChoices.length);
+      clickedBox = aiAvailChoices[randElement];
+      currentBoxID = clickedBox.id
+      $('#' + currentBoxID).css('background-image', 'url(images/x.png)')
+      aiGame.push(clickedBox)
+      spliceChoice(clickedBox);
+      $('.start').text("Human's Turn").css('background-color', 'blue');
+      count += 1;
+      gameChecker(aiGame);
+      currentPlayer = 'human'
+    }, 1000)
+  }
+};
+
+const spliceChoice = function(value){
+  i = aiAvailChoices.indexOf(value)
+  aiAvailChoices.splice(i, 1)
+}
+
+$('#oImage').on('click', function(){
+  
+})

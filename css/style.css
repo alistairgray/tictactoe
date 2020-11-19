@@ -206,8 +206,8 @@ p {
 }
 
 #hImage {
-  background-image: url("../images/x.png");
+  background-image: url("../images/human.png");
   background-position: center;
-  background-size: 50%;
+  background-size: 80%;
   background-repeat: no-repeat;
 }
