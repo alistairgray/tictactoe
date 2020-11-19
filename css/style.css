@@ -71,10 +71,6 @@ p {
   visibility: hidden;
 }
 
-.whoPlayer {
-
-}
-
 .player, .opponent {
   top: 18%;
   left: 5%;
@@ -83,13 +79,11 @@ p {
   border-radius: 3px solid red;
 }
 
-
-
 .nameInput{
   border: 3px solid black;
   display: block;
   position: relative;
-  width: 300px;
+  width: 300px;background-color: white;
   margin-top: 5%;
   text-align: center;
   padding: 10%;
@@ -172,8 +166,14 @@ p {
 }
 
 .avatar {
-  display: inline-block;
   border: 3px solid black;
+  width: 100px;
+  height: 80px;
+  color: black;
+  font-size: 30pt;
+  background-color: white;
+  text-align: center;
+  display: inline-block;
 }
 
 .playerChooser {
@@ -184,17 +184,30 @@ p {
   background-color: white;
 }
 
-.playerChooserA {
-  width: 100px;
-  height: 80px;
-  background-image: url(images/hal.png);
+#oImage {
+  background-image: url("../images/o.png");
   background-position: center;
-  background-size: contain;
+  background-size: 50%;
   background-repeat: no-repeat;
 }
 
-.playerChooserH {
-  width: 100px;
-  height: 80px;
-  /* background-image: url(images/hal.png) */
+#xImage {
+  background-image: url("../images/x.png");
+  background-position: center;
+  background-size: 50%;
+  background-repeat: no-repeat;
+}
+
+#aiImage {
+  background-image: url("../images/hal.png");
+  background-position: center;
+  background-size: 80%;
+  background-repeat: no-repeat;
+}
+
+#hImage {
+  background-image: url("../images/x.png");
+  background-position: center;
+  background-size: 50%;
+  background-repeat: no-repeat;
 }

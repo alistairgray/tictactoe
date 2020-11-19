@@ -42,6 +42,9 @@ let count = 0;
 
 // Human goes first
 $('.start').on('click', function(){
+  if(gameStatus === 'won' || gameStatus === 'draw' || gameStatus === 'inProgress'){
+    return false;
+  }
   gameStatus = 'inProgress';
   currentPlayer = 'human';
   $('.start').text("Human's Turn").css('background-color', 'blue');
@@ -126,12 +129,10 @@ const resetGame = function(){
 }
 
 const aiPlayer = function(){
-  setTimeout();
-  const setTimeout = function (){
-
-    if(gameStatus === 'won' || gameStatus === 'draw'){
-      return false;
-    } else {
+  if(gameStatus === 'won' || gameStatus === 'draw'){
+    return false;
+  } else {
+    setTimeout(function () {
       $('.start').text("AI's Turn").css('background-color', 'red');
       let randElement = Math.floor(Math.random() * aiAvailChoices.length);
       clickedBox = aiAvailChoices[randElement];
@@ -139,14 +140,13 @@ const aiPlayer = function(){
       $('#' + currentBoxID).css('background-image', 'url(images/x.png)')
       aiGame.push(clickedBox)
       spliceChoice(clickedBox);
-
       $('.start').text("Human's Turn").css('background-color', 'blue');
       count += 1;
       gameChecker(aiGame);
       currentPlayer = 'human'
-    }
-  }, 5000;
-}
+    }, 1500)
+  }
+};
 
 const spliceChoice = function(value){
   i = aiAvailChoices.indexOf(value)
