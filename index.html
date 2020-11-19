@@ -6,11 +6,23 @@
     <link rel="stylesheet" href="css/style.css"
   </head>
   <body>
-
-    <!-- <div class="whoPlayer">
-          <button id="playerO"><p>Player O</p>
-          <button id="playerX"><p>Player X</p>
-    </div> -->
+    <div class="whoPlayer">
+      <div class="player">
+        <h2>Choose Your Player</h2>
+          <div class="playerAvatar" id="player O"><p>Player O</p></div>
+          <div class="playerAvatar" id="player X"><p>Player X</p></div>
+      </div>
+      <div class="opponent">
+        <h2>Choose Your Opponent</h2>
+        <div class="aiAvatar" id="gandalf">
+          <p>Gandalf</p>
+          <img src="">
+        </div>
+        <div class="humanOp" id="playerOp">
+          <p>Human Opponent</p>
+        </div>
+    </div>
+  </div>
     <div class="grid">
       <h1>tic tac toe</h1>
       <div id="top" class="line">
@@ -43,6 +55,6 @@
     <button id="resetGame">PLAY<br /> AGAIN?</button>
 </div>
     <script src="js/jquery.js" charset="utf-8"></script>
-    <script src="js/main.js" charset="utf-8"></script>
+    <script src="js/main-AI.js" charset="utf-8"></script>
   </body>
 </html>
