@@ -78,7 +78,7 @@ for(let i=0; i < currentGame.length; i++){
 
 // The main game - on click, checks which box is clicked and gets the box ID
 $('.box').on('click', function(event){
-  $('.start').text("Human's Turn").css('background-color', 'blue');
+
   // Puts the clicked box html data into the clickedBox local variable
   let clickedBox = event.target
   // Extracts the ID from the clickedBox variable
@@ -126,21 +126,27 @@ const resetGame = function(){
 }
 
 const aiPlayer = function(){
-  if(gameStatus === 'won' || gameStatus === 'draw'){
-    return false;
-  } else {
-  $('.start').text("AI's Turn").css('background-color', 'red');
-  let randElement = Math.floor(Math.random() * aiAvailChoices.length);
-  clickedBox = aiAvailChoices[randElement];
-  currentBoxID = clickedBox.id
-  $('#' + currentBoxID).css('background-image', 'url(images/x.png)')
-  aiGame.push(clickedBox)
-  spliceChoice(clickedBox);
-  count += 1;
-  gameChecker(aiGame);
-  currentPlayer = 'human'
-  }
-};
+  setTimeout();
+  const setTimeout = function (){
+
+    if(gameStatus === 'won' || gameStatus === 'draw'){
+      return false;
+    } else {
+      $('.start').text("AI's Turn").css('background-color', 'red');
+      let randElement = Math.floor(Math.random() * aiAvailChoices.length);
+      clickedBox = aiAvailChoices[randElement];
+      currentBoxID = clickedBox.id
+      $('#' + currentBoxID).css('background-image', 'url(images/x.png)')
+      aiGame.push(clickedBox)
+      spliceChoice(clickedBox);
+
+      $('.start').text("Human's Turn").css('background-color', 'blue');
+      count += 1;
+      gameChecker(aiGame);
+      currentPlayer = 'human'
+    }
+  }, 5000;
+}
 
 const spliceChoice = function(value){
   i = aiAvailChoices.indexOf(value)

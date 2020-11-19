@@ -3,13 +3,17 @@ h1 {
   font-size: 50pt;
 }
 
-button {
+/* button {
   display: block;
   background-color: grey;
-}
+} */
 
 input {
   margin: 0 auto;
+}
+
+p {
+  font-size: 15pt;
 }
 
 .grid {
@@ -67,13 +71,19 @@ input {
   visibility: hidden;
 }
 
-.player {
+.whoPlayer {
+
+}
+
+.player, .opponent {
   top: 18%;
   left: 5%;
   width:305px;
-  position: absolute;
-  border-radius: 1px solid red;
+  position: relative;
+  border-radius: 3px solid red;
 }
+
+
 
 .nameInput{
   border: 3px solid black;
@@ -159,4 +169,32 @@ input {
   height: 100%;
   background-color: black;
   color: white;
+}
+
+.avatar {
+  display: inline-block;
+  border: 3px solid black;
+}
+
+.playerChooser {
+  width: 100px;
+  height: 80px;
+  color: black;
+  font-size: 30pt;
+  background-color: white;
+}
+
+.playerChooserA {
+  width: 100px;
+  height: 80px;
+  background-image: url(images/hal.png);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.playerChooserH {
+  width: 100px;
+  height: 80px;
+  /* background-image: url(images/hal.png) */
 }
